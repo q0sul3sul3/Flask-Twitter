@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-md-center">
+<div class="col-md-6">
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Explore</h6>
+    {% for tweet in tweets %}
+    <div class="d-flex text-muted pt-3">
+
+      <img
+	      src="{{ tweet.author.avatar(64) }}"
+	      alt=""
+	      class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+	      />
+      <p class="pb-3 mb-0 small lh-sm border-bottom w-100">
+        <a href="{{ url_for('profile', username=tweet.author.username)}}"><strong class="d-block">{{ tweet.author.username }}</strong></a>
+        {{ tweet.body }}
+    	<div>{{ tweet.create_time.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+      </p>
+
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock %}

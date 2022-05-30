@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+  <div class="row mb-2 justify-content-md-center">
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+
+          <h3 class="mb-0">{{ user.username }}</h3>
+          <div class="mb-1 text-muted">Following {{ user.followed.count() }} Followers {{ user.followers.count() }}</div>
+          
+
+      {% if user.bio %}
+		  <p class="card-text mb-auto">{{ user.bio }}</p>
+		  {% endif %}
+
+		  {% if user.create_time %}
+
+		  <p class="fw-light fs-6 text-muted"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+  		<path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+  		<path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+			</svg> Joined {{ user.create_time.strftime('%Y-%m-%d') }}</p>
+		  {% endif %}
+		  
+
+
+		  <div>
+      {% if user==current_user %}
+		  <!-- <input class="btn btn-outline-primary" type="button" value="Edit profile" onclick="location.href='{{ url_for('editprofile') }}'"> -->
+		  <a class="btn btn-outline-primary" href="/editprofile" role="button">Edit profile</a>
+		  {% endif %}
+		  </div>
+
+		  <form action="" method="post">
+					{% if user!=current_user %}
+					{% if current_user.is_following(user) %}
+					<input class="btn btn-outline-primary" type="submit" name="request_botton" value="Unfollow">
+					{% else %}
+					<input class="btn btn-outline-primary" type="submit" name="request_botton" value="Follow">
+					{% endif %}
+					{% endif %}
+		  </form>
+
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img src="{{ user.avatar() }}" alt="" class="rounded-circle">
+
+        </div>
+      </div>
+    </div>
+
+	<!-- <h1><img src="https://www.gravatar.com/avatar/bb4ad34c39ec7efe10442548ae395622?d=identicon&s=128" alt="">{{ user.username }}</h1>  -->
+	<!-- current_user.username, gravatar Hash: bb4ad34c39ec7efe10442548ae395622-->
+
+{% include 'tweets.html' %}
+
+{% endblock %}
+
+	
+

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<!-- <div class="card text-center">
+  <div class="card-header ">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+</div> -->
+
+
+<div class="container">
+	<div class="row justify-content-md-center">
+		<div class="col-md-6">
+<div class="card">
+	<div class="card-header bg-primary ">
+		<h5 class="text-white mt-2">Edit profile</h>
+	</div>
+
+<div class="card-body">
+    <h5 class="card-title text-center">Bio</h5>
+    <form class="px-4" action="" method="post">
+	{{ form.hidden_tag() }}
+	<div class="form-outline mb-4">
+		{{ form.bio(cols=50, rows=4) }}
+
+		{% for error in form.bio.errors %}
+		<div style="color: coral;">[{{ error }}]<div>
+		{% endfor %}
+
+	</div>
+</div>
+<div class="card-footer text-end">
+	{{ form.submit() }}
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<!-- <div class="container">
+	<h1>Edit Profile</h1>
+	<form action="" method="post">
+		{{ form.hidden_tag() }} -->
+<!-- 		<div>
+			{{ form.bio(cols=50, rows=4) }}
+			{% for error in form.bio.errors %}
+			<div style="color: coral;">[{{ error }}]<div>
+			{% endfor %}
+		</div> -->
+<!-- 		<div>
+			{{ form.submit() }}
+		</div>
+	</form>
+</div> -->
+{% endblock %}
